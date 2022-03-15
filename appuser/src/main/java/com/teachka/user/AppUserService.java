@@ -2,9 +2,17 @@ package com.teachka.user;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public record AppUserService(AppUserRepository repository) {
-    public void registerUser(AppUserRegistrationRequest request) {
+
+
+    public List<AppUser> findAll(){
+        return repository.findAll();
+    }
+
+    public AppUser registerUser(AppUserRegistrationRequest request) {
         AppUser appUser =  AppUser.builder()
                 .email(request.email())
                 .firstName(request.firstName())
@@ -15,5 +23,7 @@ public record AppUserService(AppUserRepository repository) {
         // TODO check if email is taken
         // TODO email confirmation
         repository.save(appUser);
+        return appUser;
     }
+
 }
