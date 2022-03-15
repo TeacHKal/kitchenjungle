@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("api/v1/users")
-public record UserController(UserService userService) {
+public record AppUserController(AppUserService appuserService) {
 
     @PostMapping
-    public void registerUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
-        log.info("new user registration {}", userRegistrationRequest);
-        userService.registerUser(userRegistrationRequest);
+    public void registerUser(@RequestBody AppUserRegistrationRequest appuserRegistrationRequest) {
+        log.info("new user registration {}", appuserRegistrationRequest);
+        appuserService.registerUser(appuserRegistrationRequest);
     }
 }

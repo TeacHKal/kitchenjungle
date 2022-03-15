@@ -12,15 +12,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class AppUser {
     @Id
     @SequenceGenerator(
-            name = "user_id_sequence",
-            sequenceName = "user_id_sequence"
+            name = "app_user_id_sequence",
+            sequenceName = "app_user_id_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_id_sequence"
+            generator = "app_user_id_sequence"
     )
     private Integer id;
     private String email;

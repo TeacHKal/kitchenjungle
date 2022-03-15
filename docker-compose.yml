@@ -42,6 +42,8 @@ services:
 #      - postgres
 
 networks:
+  default:
+    name: bridge
   postgres:
     driver: bridge
   spring:

@@ -1,6 +1,6 @@
 package com.teachka.user;
 
-public record UserRegistrationRequest(
+public record AppUserRegistrationRequest(
         String email,
         String firstName,
         String lastName) {
