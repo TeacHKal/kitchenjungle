@@ -1,4 +1,4 @@
-package com.teachka.user;
+package com.teachkal.user;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.teachka.user;
+package com.teachkal.user;
 
 public record AppUserRegistrationRequest(
         String email,
