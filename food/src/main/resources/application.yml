@@ -8,7 +8,7 @@ spring:
     username: postgres
     password: 1234
     # Connection url
-    url: jdbc:postgresql://localhost:5432/app_user
+    url: jdbc:postgresql://localhost:5432/food
 
   # ===============================
   # = JPA / HIBERNATE
