@@ -26,9 +26,9 @@ public record AppUserController(AppUserService appuserService) {
     public ResponseEntity<AppUserResponseDto> getUserById(@PathVariable Long id) {
         log.info("get user with id");
         return Optional
-            .ofNullable(appuserService.findUserById(id))
-            .map(appUser -> new ResponseEntity<>(new AppUserResponseDto(appUser), HttpStatus.FOUND)).
-            orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .ofNullable(appuserService.findUserById(id))
+                .map(appUser -> new ResponseEntity<>(new AppUserResponseDto(appUser), HttpStatus.FOUND))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 
