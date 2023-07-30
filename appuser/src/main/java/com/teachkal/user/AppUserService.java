@@ -1,6 +1,7 @@
 package com.teachkal.user;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -13,6 +14,12 @@ public record AppUserService(AppUserRepository repository) {
     }
 
     public void registerUser(AppUserRegistrationRequest request) {
+
+        // Check if email exist
+        if(existsByEmail(request.email())){
+            throw new RuntimeException("Email already exist");
+        }
+
         AppUser appUser =  AppUser.builder()
                 .email(request.email())
                 .firstName(request.firstName())
@@ -20,9 +27,16 @@ public record AppUserService(AppUserRepository repository) {
                 .build();
 
         // TODO check if email is valid
-        // TODO check if email is taken
+
         // TODO email confirmation
         repository.save(appUser);
+    }
+    public AppUser findUserById(String email) {
+        return repository.findByEmail(email);
+    }
+
+    public Boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
     }
 
 }
