@@ -38,14 +38,17 @@ public record AppUserService(AppUserRepository repository) {
                 .lastName(request.lastName())
                 .build();
 
-        // TODO check if email is valid
-
         // TODO email confirmation
         repository.save(appUser);
     }
-    public AppUser findUserById(String email) {
+    public AppUser findUserById(Long id) {
+        return repository.findById(id);
+    }
+
+    public AppUser findUserByEmail(String email) {
         return repository.findByEmail(email);
     }
+
 
     public Boolean existsByEmail(String email) {
         return repository.existsByEmail(email);

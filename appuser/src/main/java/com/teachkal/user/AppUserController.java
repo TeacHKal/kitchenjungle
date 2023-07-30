@@ -16,6 +16,12 @@ public record AppUserController(AppUserService appuserService) {
         return appuserService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public AppUser getUserById(@PathVariable Long id) {
+        log.info("get app users");
+        return appuserService.findUserById(id);
+    }
+
     @PostMapping
     public void registerUser(@RequestBody AppUserRegistrationRequest appuserRegistrationRequest) {
         log.info("new app_user registration {}", appuserRegistrationRequest);
