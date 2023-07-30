@@ -13,12 +13,12 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("api/v1/users")
-public record AppUserController(AppUserService appuserService) {
+public record AppUserController(AppUserService appUserService) {
 
     @GetMapping
     public ResponseEntity<List<AppUser>> registerUser() {
         log.info("get app users");
-        List<AppUser> userList = appuserService.findAll();
+        List<AppUser> userList = appUserService.findAll();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
@@ -26,7 +26,7 @@ public record AppUserController(AppUserService appuserService) {
     public ResponseEntity<AppUserResponseDto> getUserById(@PathVariable Long id) {
         log.info("get user with id");
         return Optional
-                .ofNullable(appuserService.findUserById(id))
+                .ofNullable(appUserService.findUserById(id))
                 .map(appUser -> new ResponseEntity<>(new AppUserResponseDto(appUser), HttpStatus.FOUND))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -35,7 +35,7 @@ public record AppUserController(AppUserService appuserService) {
     @PostMapping
     public ResponseEntity<AppUser> registerUser(@RequestBody AppUserRegistrationRequestDto appuserRegistrationRequestDto) {
         log.info("register user");
-        AppUser appUser = appuserService.registerUser(appuserRegistrationRequestDto);
+        AppUser appUser = appUserService.registerUser(appuserRegistrationRequestDto);
         return new ResponseEntity<>(appUser, HttpStatus.CREATED);
     }
 }
