@@ -18,7 +18,7 @@ spring:
       # Hibernate ddl auto (create, create-drop, update): with "update" the database
       # schema will be automatically updated accordingly to java entities found in
       # the project
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
