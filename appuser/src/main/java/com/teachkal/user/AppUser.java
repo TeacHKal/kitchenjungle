@@ -19,4 +19,5 @@ public class AppUser {
     private String email;
     private String firstName;
     private String lastName;
+    private String password;
 }
