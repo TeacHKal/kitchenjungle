@@ -2,7 +2,8 @@ package com.teachkal.user.dto;
 
 import com.teachkal.user.AppUser;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppUserResponseDto {
 
@@ -11,6 +12,8 @@ public class AppUserResponseDto {
     public String lastName;
     public String email;
 
+    public AppUserResponseDto() {}
+
     public AppUserResponseDto(AppUser appUser) {
         this.id = appUser.getId();
         this.firstName = appUser.getFirstName();
@@ -18,5 +21,21 @@ public class AppUserResponseDto {
         this.email = appUser.getEmail();
     }
 
+    static public List<AppUserResponseDto> AppUserListResponseDto(List<AppUser> appUserList) {
+        List<AppUserResponseDto> appUserResponseListDto = new ArrayList<>();
 
+        for (AppUser appUser : appUserList) {
+            AppUserResponseDto currentAppUserResponseDto = new AppUserResponseDto();
+
+            currentAppUserResponseDto.id = appUser.getId();
+            currentAppUserResponseDto.firstName = appUser.getFirstName();
+            currentAppUserResponseDto.lastName = appUser.getLastName();
+            currentAppUserResponseDto.email = appUser.getEmail();
+
+            appUserResponseListDto.add(currentAppUserResponseDto);
+        }
+        return appUserResponseListDto;
+
+
+    }
 }
