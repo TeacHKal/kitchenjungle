@@ -17,8 +17,8 @@ public record AppUserController(AppUserService appuserService) {
     }
 
     @PostMapping
-    public AppUser registerUser(@RequestBody AppUserRegistrationRequest appuserRegistrationRequest) {
+    public void registerUser(@RequestBody AppUserRegistrationRequest appuserRegistrationRequest) {
         log.info("new app_user registration {}", appuserRegistrationRequest);
-        return appuserService.registerUser(appuserRegistrationRequest);
+        appuserService.registerUser(appuserRegistrationRequest);
     }
 }
