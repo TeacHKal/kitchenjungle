@@ -1,10 +1,8 @@
 package com.teachkal.user;
 
+import com.teachkal.user.dto.AppUserRegistrationRequestDto;
 import com.teachkal.user.exceptions.MyException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,7 +16,7 @@ public record AppUserService(AppUserRepository repository) {
         return repository.findAll();
     }
 
-    public AppUser registerUser(AppUserRegistrationRequest request) {
+    public AppUser registerUser(AppUserRegistrationRequestDto request) {
 
         // Check if email is valid
         if(!isValidEmail(request.email())) throw new MyException("Invalid email");
@@ -30,6 +28,7 @@ public record AppUserService(AppUserRepository repository) {
                 .email(request.email())
                 .firstName(request.firstName())
                 .lastName(request.lastName())
+                .password(request.password())
                 .build();
 
         // TODO email confirmation

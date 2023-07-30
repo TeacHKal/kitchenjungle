@@ -1,5 +1,7 @@
 package com.teachkal.user;
 
+import com.teachkal.user.dto.AppUserRegistrationRequestDto;
+import com.teachkal.user.dto.AppUserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +23,19 @@ public record AppUserController(AppUserService appuserService) {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AppUser> getUserById(@PathVariable Long id) {
+    public ResponseEntity<AppUserResponseDto> getUserById(@PathVariable Long id) {
         log.info("get user with id");
         return Optional
             .ofNullable(appuserService.findUserById(id))
-            .map(appUser -> new ResponseEntity<>(appUser, HttpStatus.FOUND)).
+            .map(appUser -> new ResponseEntity<>(new AppUserResponseDto(appUser), HttpStatus.FOUND)).
             orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
     @PostMapping
-    public ResponseEntity<AppUser> registerUser(@RequestBody AppUserRegistrationRequest appuserRegistrationRequest) {
+    public ResponseEntity<AppUser> registerUser(@RequestBody AppUserRegistrationRequestDto appuserRegistrationRequestDto) {
         log.info("register user");
-        AppUser appUser = appuserService.registerUser(appuserRegistrationRequest);
+        AppUser appUser = appuserService.registerUser(appuserRegistrationRequestDto);
         return new ResponseEntity<>(appUser, HttpStatus.CREATED);
     }
 }
