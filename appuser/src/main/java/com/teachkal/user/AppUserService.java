@@ -21,16 +21,10 @@ public record AppUserService(AppUserRepository repository) {
     public void registerUser(AppUserRegistrationRequest request) {
 
         // Check if email is valid
-        if(!isValidEmail(request.email())){
-            String emailMsg = "Invalid email address";
-            throw new MyException(emailMsg);
-        }
+        if(!isValidEmail(request.email())) throw new MyException("Invalid email");
 
         // Check if email exist
-        if(existsByEmail(request.email())){
-            String emailMsg = "Email already exist";
-            throw new IllegalArgumentException(emailMsg);
-        }
+        if(existsByEmail(request.email())) throw new IllegalArgumentException("Email already exists");
 
         AppUser appUser =  AppUser.builder()
                 .email(request.email())
