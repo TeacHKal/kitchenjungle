@@ -18,13 +18,13 @@ public record AppUserService(AppUserRepository repository) {
         return repository.findAll();
     }
 
-    public void registerUser(AppUserRegistrationRequest request) {
+    public AppUser registerUser(AppUserRegistrationRequest request) {
 
         // Check if email is valid
         if(!isValidEmail(request.email())) throw new MyException("Invalid email");
 
         // Check if email exist
-        if(existsByEmail(request.email())) throw new IllegalArgumentException("Email already exists");
+        if(existsByEmail(request.email())) throw new MyException("Email already exists");
 
         AppUser appUser =  AppUser.builder()
                 .email(request.email())
@@ -33,7 +33,7 @@ public record AppUserService(AppUserRepository repository) {
                 .build();
 
         // TODO email confirmation
-        repository.save(appUser);
+        return repository.save(appUser);
     }
     public AppUser findUserById(Long id) {
         return repository.findById(id);
