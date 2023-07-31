@@ -5,16 +5,42 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class MyException extends RuntimeException{
-    public MyException(String message) {
+    static HttpStatus httpStatus;
+    public MyException(String message, HttpStatus httpStatus) {
         super(message);
+        MyException.httpStatus = httpStatus;
     }
 
     @ControllerAdvice
     public static class MyExceptionHandler {
+
+
         @ExceptionHandler(MyException.class)
-        public ResponseEntity<String> handleMyException(MyException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        public ResponseEntity<ExceptionData> handleMyException(MyException ex) {
+            ExceptionData exceptionData = new ExceptionData(ex.getMessage(), ex.getLocalizedMessage(), new Date(), getHttpStatus());
+            return new ResponseEntity<>(exceptionData, getHttpStatus());
+
         }
     }
+
+    public static HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
+
+    public class DateUtils {
+        public static String formatDate(Date date, String format) {
+            SimpleDateFormat formatter = new SimpleDateFormat(format);
+            return formatter.format(date);
+        }
+    }
+
+
+
+
+
 }

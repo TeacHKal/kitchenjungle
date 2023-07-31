@@ -2,6 +2,7 @@ package com.teachkal.user;
 
 import com.teachkal.user.dto.AppUserRegistrationRequestDto;
 import com.teachkal.user.exceptions.MyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,10 @@ public record AppUserService(AppUserRepository repository) {
     public AppUser registerUser(AppUserRegistrationRequestDto request) {
 
         // Check if email is valid
-        if(!isValidEmail(request.email())) throw new MyException("Invalid email");
+        if(!isValidEmail(request.email())) throw new MyException("Invalid email", HttpStatus.BAD_REQUEST);
 
         // Check if email exist
-        if(existsByEmail(request.email())) throw new MyException("Email already exists");
+        if(existsByEmail(request.email())) throw new MyException("Email already exists", HttpStatus.BAD_REQUEST);
 
         AppUser appUser =  AppUser.builder()
                 .email(request.email())
