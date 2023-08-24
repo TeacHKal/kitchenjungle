@@ -1,6 +1,7 @@
 package com.teachkal.user;
 
-import com.teachkal.user.dto.AppUserRegistrationRequestDto;
+import com.teachkal.user.dto.AppUserRequestDto;
+import com.teachkal.user.dto.AppUserResponseDto;
 import com.teachkal.user.exceptions.MyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public record AppUserService(AppUserRepository repository) {
         return repository.findAll();
     }
 
-    public AppUser registerUser(AppUserRegistrationRequestDto request) {
+    public AppUser registerUser(AppUserRequestDto request) {
 
         // Check if email is valid
         if(!isValidEmail(request.email())) throw new MyException("Invalid email", HttpStatus.BAD_REQUEST);

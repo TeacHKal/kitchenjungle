@@ -1,6 +1,6 @@
 package com.teachkal.user.dto;
 
-public record AppUserRegistrationRequestDto(
+public record AppUserRequestDto(
         String email,
         String firstName,
         String lastName,

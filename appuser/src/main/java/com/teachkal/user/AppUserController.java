@@ -1,6 +1,6 @@
 package com.teachkal.user;
 
-import com.teachkal.user.dto.AppUserRegistrationRequestDto;
+import com.teachkal.user.dto.AppUserRequestDto;
 import com.teachkal.user.dto.AppUserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,9 +36,10 @@ public record AppUserController(AppUserService appUserService) {
 
 
     @PostMapping
-    public ResponseEntity<AppUser> registerUser(@RequestBody AppUserRegistrationRequestDto appuserRegistrationRequestDto) {
+    public ResponseEntity<AppUserResponseDto> registerUser(@RequestBody AppUserRequestDto appUserRequestDto) {
         log.info("register user");
-        AppUser appUser = appUserService.registerUser(appuserRegistrationRequestDto);
-        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
+        AppUser appUser = appUserService.registerUser(appUserRequestDto);
+        AppUserResponseDto appUserResponseDto = new AppUserResponseDto(appUser);
+        return new ResponseEntity<>(appUserResponseDto, HttpStatus.CREATED);
     }
 }

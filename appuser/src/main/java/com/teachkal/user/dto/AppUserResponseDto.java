@@ -36,6 +36,5 @@ public class AppUserResponseDto {
         }
         return appUserResponseListDto;
 
-
     }
 }
