@@ -8,13 +8,17 @@ public class ExceptionData {
     public String message;
     public String localizedMessage;
     public String date;
-    public HttpStatus code;
+    public HttpStatus httpStatus;
+    public HttpStatus.Series series;
+    public int code;
 
-    public ExceptionData(String message, String localizedMessage, Date date, HttpStatus httpStatus) {
+    public ExceptionData(String message, String localizedMessage, Date date, HttpStatus httpStatus, HttpStatus.Series series, int value) {
         this.message = message;
         this.localizedMessage = localizedMessage;
         this.date = formatDate(date);
-        this.code = httpStatus;
+        this.httpStatus = httpStatus;
+        this.series = series;
+        this.code = value;
 
     }
 

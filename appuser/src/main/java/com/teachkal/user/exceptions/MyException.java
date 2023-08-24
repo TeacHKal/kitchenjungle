@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.xml.xpath.XPathException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,9 +23,8 @@ public class MyException extends RuntimeException{
 
         @ExceptionHandler(MyException.class)
         public ResponseEntity<ExceptionData> handleMyException(MyException ex) {
-            ExceptionData exceptionData = new ExceptionData(ex.getMessage(), ex.getLocalizedMessage(), new Date(), getHttpStatus());
+            ExceptionData exceptionData = new ExceptionData(ex.getMessage(), ex.getLocalizedMessage(), new Date(), getHttpStatus(), getHttpStatus().series(), getHttpStatus().value());
             return new ResponseEntity<>(exceptionData, getHttpStatus());
-
         }
     }
 
